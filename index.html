@@ -7,14 +7,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --gold: #d4af37;
+            --gold: #c5a059;
+            --light-gold: #e8d0a0;
             --white: #ffffff;
-            --bg-overlay: rgba(0, 0, 0, 0.4); /* تغميق خفيف لإبراز العداد */
         }
 
         * { 
             box-sizing: border-box; 
-            cursor: none !important; /* إخفاء مؤشر الماوس */
+            cursor: none !important; /* إخفاء الماوس العادي */
         }
 
         body, html {
@@ -22,14 +22,13 @@
             margin: 0;
             font-family: 'Tajawal', sans-serif;
             overflow: hidden;
-            background-color: #1a1a1a;
+            background-color: #0d0d0d;
         }
 
-        /* خلفية المجلس السعودي الفخم - دمج الصورة الجديدة */
+        /* خلفية المجلس الملكي السعودي الفخم */
         .bg-image {
-            background-image: url('https://image.spreadshirtmedia.net/image-server/v1/mp/products/T210A2MPA3347PT17X46Y38D1047124357S50/views/1,width=1200,height=630,appearanceId=2,backgroundColor=F2F2F2/dallah-the-traditional-arabian-coffee-pot-mens-premium-t-shirt.jpg'); 
-            /* ملاحظة: هذه صورة بديلة فخمة، إذا كان لديك رابط مباشر للصورة الخاصة بك ضعها هنا */
-            background-image: url('https://image.spreadshirtmedia.net/image-server/v1/mp/compositions/T210A2MPA3347PT17X0Y0D1047124357S25/views/1,width=1200,height=1200,appearanceId=2,backgroundColor=F2F2F2/dallah-the-traditional-arabian-coffee-pot-mens-premium-t-shirt.jpg');
+            background-image: url('https://raw.githubusercontent.com/abu-hussam-dev/assets/main/royal-hall.jpg'); /* رابط افتراضي فخم */
+            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1519225423080-719306788a11?q=80&w=2070&auto=format&fit=crop'); 
             height: 100%;
             background-position: center;
             background-repeat: no-repeat;
@@ -40,14 +39,7 @@
             position: relative;
         }
 
-        .overlay {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: var(--bg-overlay);
-            z-index: 0;
-        }
-
-        /* مؤشر الخاتم المخصص */
+        /* مؤشر الخاتم المذهب المخصص */
         #custom-cursor {
             position: fixed;
             top: 0; left: 0;
@@ -59,217 +51,214 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            transition: transform 0.02s ease-out;
             filter: drop-shadow(0 0 10px var(--gold));
+            transition: transform 0.02s linear;
         }
 
-        /* جزيئات البريق خلف الماوس */
+        /* بريق خلف الماوس */
         .sparkle {
             position: fixed;
-            width: 8px; height: 8px;
-            background-color: var(--gold);
+            width: 5px; height: 5px;
+            background-color: var(--light-gold);
             border-radius: 50%;
             pointer-events: none;
             z-index: 9998;
             opacity: 1;
-            animation: sparkle-fade 0.7s ease-out forwards;
-            box-shadow: 0 0 15px var(--gold);
+            animation: sparkle-fade 0.8s ease-out forwards;
+            box-shadow: 0 0 8px var(--gold);
         }
 
         @keyframes sparkle-fade {
             0% { transform: scale(1); opacity: 1; }
-            100% { transform: scale(5); opacity: 0; }
+            100% { transform: scale(4); opacity: 0; }
         }
 
-        /* المحتوى الأساسي - تصميم احترافي فخم */
+        /* صندوق العداد الاحترافي (Glassmorphism Gold) */
         .content {
             position: relative;
             z-index: 10;
-            background: rgba(26, 26, 26, 0.7); /* خلفية نصف شفافة */
-            backdrop-filter: blur(10px); /* تأثير تغبيش فخم */
-            -webkit-backdrop-filter: blur(10px);
+            background: rgba(15, 15, 15, 0.75);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             border: 2px solid var(--gold);
             border-radius: 30px;
-            padding: clamp(25px, 6vw, 50px);
+            padding: clamp(30px, 8vw, 60px);
             text-align: center;
-            width: 90%;
-            max-width: 600px;
-            color: var(--white);
-            box-shadow: 0 25px 60px rgba(0,0,0,0.9);
-            /* أنيميشن الدخول */
+            width: 92%;
+            max-width: 650px;
+            box-shadow: 0 0 40px rgba(197, 160, 89, 0.3), inset 0 0 20px rgba(197, 160, 89, 0.1);
             opacity: 0;
-            animation: fadeInContent 1.8s ease-out 0.3s forwards;
-            position: relative;
-            overflow: hidden; /* لقص المؤثرات الداخلية */
+            animation: fadeInPage 2s ease-out forwards;
         }
 
-        @keyframes fadeInContent {
-            0% { opacity: 0; transform: translateY(30px); }
-            100% { opacity: 1; transform: translateY(0); }
+        @keyframes fadeInPage {
+            0% { opacity: 0; transform: scale(0.95); }
+            100% { opacity: 1; transform: scale(1); }
         }
-
-        /* زخرفة مذهبة في زوايا العداد */
-        .content::before, .content::after {
-            content: '';
-            position: absolute;
-            width: 100px; height: 100px;
-            border: 10px solid transparent;
-            border-radius: 20px;
-            pointer-events: none;
-        }
-        .content::before { top: 10px; right: 10px; border-top-color: var(--gold); border-right-color: var(--gold); }
-        .content::after { bottom: 10px; left: 10px; border-bottom-color: var(--gold); border-left-color: var(--gold); }
 
         .blessing {
-            color: var(--gold);
-            font-size: clamp(1.4rem, 4.5vw, 2.2rem);
+            color: var(--light-gold);
+            font-size: clamp(1.4rem, 5vw, 2.4rem);
             font-weight: 700;
-            margin-bottom: 25px;
-            text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px rgba(197, 160, 89, 0.5);
+            letter-spacing: 1px;
         }
 
-        .ring-display { font-size: clamp(50px, 15vw, 85px); margin: 20px 0; filter: drop-shadow(0 0 15px var(--gold)); }
+        .divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 20px auto;
+            width: 80%;
+        }
 
-        .wedding-details { margin-bottom: 10px; }
-        .wedding-details h1 { font-size: clamp(1.2rem, 4vw, 1.8rem); margin: 5px 0; font-weight: 400; color: #fff; }
-        .date { color: var(--gold); font-size: clamp(1.1rem, 3.5vw, 1.4rem); font-weight: bold; margin-top: 10px; letter-spacing: 1px; }
+        .wedding-info h1 {
+            color: var(--white);
+            font-size: clamp(1.2rem, 4.5vw, 1.8rem);
+            font-weight: 400;
+            margin: 10px 0;
+        }
 
+        .date-display {
+            color: var(--gold);
+            font-size: clamp(1.1rem, 3.5vw, 1.3rem);
+            font-weight: bold;
+        }
+
+        /* شبكة الوقت الاحترافية */
         .timer-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: clamp(8px, 2vw, 20px);
+            gap: clamp(10px, 3vw, 25px);
             margin-top: 40px;
-            position: relative;
-            z-index: 5;
         }
 
         .unit {
-            background: rgba(212, 175, 55, 0.08); /* لون خلفي خفيف */
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 18px;
-            padding: clamp(15px, 4vw, 25px) 5px;
-            box-shadow: inset 0 0 20px rgba(212, 175, 55, 0.05);
-            transition: transform 0.3s ease;
+            position: relative;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            border-radius: 20px;
+            padding: clamp(20px, 5vw, 30px) 5px;
+            transition: all 0.4s ease;
         }
 
         .unit:hover {
-            transform: scale(1.05); /* حركة خفيفة عند التمرير بالماوس (للكمبيوتر) */
-            border-color: rgba(212, 175, 55, 0.6);
+            background: rgba(197, 160, 89, 0.1);
+            border-color: var(--gold);
+            transform: translateY(-5px);
         }
 
-        .val { display: block; font-size: clamp(1.8rem, 7vw, 3rem); font-weight: bold; color: var(--white); text-shadow: 0 0 15px rgba(255,255,255,0.7); }
-        .lab { font-size: clamp(0.7rem, 2.8vw, 1rem); color: var(--gold); font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+        .val { 
+            display: block; 
+            font-size: clamp(1.8rem, 8vw, 3.2rem); 
+            font-weight: bold; 
+            color: var(--white);
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
 
-        /* حاوية مؤثرات القلوب المتساقطة */
-        #bg-particles {
+        .lab { 
+            font-size: clamp(0.7rem, 3vw, 1rem); 
+            color: var(--gold); 
+            font-weight: bold; 
+            margin-top: 5px;
+            display: block;
+        }
+
+        /* جزيئات الخلفية المتساقطة */
+        #particles-container {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 1;
             pointer-events: none;
+            z-index: 1;
         }
 
-        .particle {
+        .fall-p {
             position: absolute;
-            color: rgba(212, 175, 55, 0.5); /* ذهبي شفاف */
-            animation: fall 7s linear infinite;
+            color: rgba(197, 160, 89, 0.6);
+            animation: fall-anim 8s linear infinite;
         }
 
-        @keyframes fall {
-            0% { transform: translateY(-100px) rotate(0deg); opacity: 0; }
-            10% { opacity: 1; }
-            95% { opacity: 1; }
-            100% { transform: translateY(115vh) rotate(360deg); opacity: 0; }
+        @keyframes fall-anim {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+            20% { opacity: 1; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
         }
 
         @media (max-width: 480px) {
-            .timer-grid { gap: 10px; }
-            .content { padding: 35px 20px; }
-            .unit { padding: 18px 2px; }
+            .content { padding: 40px 15px; }
+            .timer-grid { gap: 8px; }
         }
     </style>
 </head>
 <body>
 
 <div id="custom-cursor">💍</div>
-
-<div id="bg-particles"></div>
+<div id="particles-container"></div>
 
 <div class="bg-image">
-    <div class="overlay"></div>
     <div class="content">
         <div class="blessing">بارك الله لهما وبارك عليهما وجمع بينهما في خير ❤️</div>
         
-        <div class="ring-display">💍</div>
+        <div class="divider"></div>
 
-        <div class="wedding-details">
+        <div class="wedding-info">
             <h1>زواج المهندس عبدالرحمن العتيبي</h1>
-            <div class="date">السبت: 6 يونيو 2026 م</div>
+            <div class="date-display">6 يونيو 2026 م</div>
         </div>
 
         <div class="timer-grid">
-            <div class="unit"><span class="val" id="days">00</span><span class="lab">يوم</span></div>
-            <div class="unit"><span class="val" id="hours">00</span><span class="lab">ساعة</span></div>
-            <div class="unit"><span class="val" id="minutes">00</span><span class="lab">دقيقة</span></div>
-            <div class="unit"><span class="val" id="seconds">00</span><span class="lab">ثانية</span></div>
+            <div class="unit"><span class="val" id="d">00</span><span class="lab">يوم</span></div>
+            <div class="unit"><span class="val" id="h">00</span><span class="lab">ساعة</span></div>
+            <div class="unit"><span class="val" id="m">00</span><span class="lab">دقيقة</span></div>
+            <div class="unit"><span class="val" id="s">00</span><span class="lab">ثانية</span></div>
         </div>
     </div>
 </div>
 
 <script>
-    // تحريك الخاتم مع الماوس وتوليد البريق الفخم
+    // حركة الماوس والبريق
     const cursor = document.getElementById('custom-cursor');
-    
     document.addEventListener('mousemove', (e) => {
-        // تحريك الخاتم
         cursor.style.left = e.clientX + 'px';
         cursor.style.top = e.clientY + 'px';
 
-        // توليد بريق ذهبي فخم خلف الخاتم
-        if (Math.random() > 0.65) { // كثافة بريق محسنة
-            const sparkle = document.createElement('div');
-            sparkle.className = 'sparkle';
-            sparkle.style.left = (e.clientX + (Math.random() - 0.5) * 15) + 'px';
-            sparkle.style.top = (e.clientY + (Math.random() - 0.5) * 15) + 'px';
-            sparkle.style.background = Math.random() > 0.4 ? '#d4af37' : '#fff'; // مزيج ذهبي وأبيض
-            document.body.appendChild(sparkle);
-            setTimeout(() => sparkle.remove(), 700); 
+        if (Math.random() > 0.7) {
+            const sp = document.createElement('div');
+            sp.className = 'sparkle';
+            sp.style.left = (e.clientX + (Math.random() - 0.5) * 15) + 'px';
+            sp.style.top = (e.clientY + (Math.random() - 0.5) * 15) + 'px';
+            document.body.appendChild(sp);
+            setTimeout(() => sp.remove(), 800);
         }
     });
 
-    // توليد مؤثرات القلوب والنجوم المتساقطة
-    const particleContainer = document.getElementById('bg-particles');
-    const particleSymbols = ['❤️', '✨', '⭐'];
-
-    function createParticle() {
-        if (document.visibilityState === 'visible') { // للحفاظ على أداء الجوال
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.innerHTML = particleSymbols[Math.floor(Math.random() * particleSymbols.length)];
-            particle.style.left = Math.random() * 100 + 'vw';
-            particle.style.fontSize = Math.random() * 25 + 12 + 'px'; // أحجام متنوعة
-            particle.style.animationDuration = Math.random() * 5 + 4 + 's'; // سرعات متنوعة لفخامة الحركة
-            particleContainer.appendChild(particle);
-
-            setTimeout(() => particle.remove(), 7000);
-        }
+    // القلوب والنجوم المتساقطة
+    const partContainer = document.getElementById('particles-container');
+    const symbols = ['✨', '⭐', '❤️'];
+    function createP() {
+        const p = document.createElement('div');
+        p.className = 'fall-p';
+        p.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+        p.style.left = Math.random() * 100 + 'vw';
+        p.style.fontSize = Math.random() * 20 + 10 + 'px';
+        p.style.animationDuration = Math.random() * 5 + 5 + 's';
+        partContainer.appendChild(p);
+        setTimeout(() => p.remove(), 8000);
     }
+    setInterval(createP, 300);
 
-    // توليد جزيء جديد كل 280 مللي ثانية (سرعة تساقط هادئة)
-    setInterval(createParticle, 280);
-
-    // كود عداد الوقت المطور (احترافي بالكامل)
-    const targetDate = new Date("June 6, 2026 00:00:00").getTime();
+    // عداد الوقت
+    const target = new Date("June 6, 2026 00:00:00").getTime();
     function update() {
-        const now = new Date().getTime();
-        const diff = targetDate - now;
+        const diff = target - new Date().getTime();
         if (diff <= 0) {
-            document.querySelector(".content").innerHTML = "<div class='blessing'>ألف مبروك! تم الزواج بحمد الله ❤️<br><span style='font-size:1.3rem; color:white;'>بارك الله لهما وبارك عليهما وجمع بينهما في خير</span></div>";
+            document.querySelector(".content").innerHTML = "<div class='blessing'>ألف مبروك الزواج! ❤️</div>";
             return;
         }
-        document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
-        document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        document.getElementById("minutes").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        document.getElementById("seconds").innerText = Math.floor((diff % (1000 * 60)) / 1000);
+        document.getElementById("d").innerText = Math.floor(diff / 86400000);
+        document.getElementById("h").innerText = Math.floor((diff % 86400000) / 3600000);
+        document.getElementById("m").innerText = Math.floor((diff % 3600000) / 60000);
+        document.getElementById("s").innerText = Math.floor((diff % 60000) / 1000);
     }
     setInterval(update, 1000);
     update();
