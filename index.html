@@ -3,12 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>زواج عبدالرحمن| Al-Otaibi Wedding</title>
+    <title>زواج عبدالرحمن | Al-Otaibi Wedding</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --gold: #d4af37;
+            --white: #ffffff;
+            --bg-overlay: rgba(0, 0, 0, 0.6); /* تغميق الخلفية لإبراز المحتوى */
+        }
+
         * { 
             box-sizing: border-box; 
-            cursor: none !important; /* إخفاء مؤشر الماوس */
+            cursor: none !important; /* إخفاء مؤشر الماوس العادي */
         }
 
         body, html {
@@ -16,26 +22,29 @@
             margin: 0;
             font-family: 'Tajawal', sans-serif;
             overflow: hidden;
-            background-color: #1a1a1a;
+            background-color: #000; /* لون خلفي احتياطي */
         }
 
-        /* حاوية الخلفية */
-        .bg-image {
-            background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop'); 
-            height: 100%;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
+        /* حاوية الفيديو الخلفي */
+        .video-bg-container {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -1; /* خلف كل المحتويات */
+            overflow: hidden;
         }
 
+        .video-bg {
+            width: 100%; height: 100%;
+            object-fit: cover; /* لضمان ملء الشاشة بدون تشويه */
+        }
+
+        /* طبقة التغميق فوق الفيديو */
         .overlay {
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
+            background: var(--bg-overlay);
+            z-index: 0;
         }
 
         /* مؤشر الخاتم المخصص */
@@ -50,10 +59,86 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            transition: transform 0.03s ease-out; /* حركة أسرع */
+            transition: transform 0.02s ease-out; /* حركة فائقة السرعة */
         }
 
-        /* حاوية المؤثرات الخلفية (القلوب والنجوم المتساقطة) */
+        /* جزيئات البريق خلف الماوس */
+        .sparkle {
+            position: fixed;
+            width: 6px; height: 6px;
+            background-color: var(--gold);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            opacity: 1;
+            animation: sparkle-fade 0.7s ease-out forwards;
+            box-shadow: 0 0 10px var(--gold);
+        }
+
+        @keyframes sparkle-fade {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(4); opacity: 0; }
+        }
+
+        /* المحتوى الأساسي (تأثير Glassmorphism الفخم) */
+        .content {
+            position: relative;
+            z-index: 10;
+            /* خلفية شفافة مع تأثير تغبيش */
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px); 
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 25px;
+            padding: clamp(25px, 6vw, 50px);
+            text-align: center;
+            width: 90%;
+            max-width: 550px;
+            color: var(--white);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            /* أنيميشن الدخول */
+            opacity: 0;
+            animation: fadeInContent 2s ease-out 0.5s forwards;
+            margin: auto; /* لتوسيطه */
+        }
+
+        @keyframes fadeInContent {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .blessing {
+            color: var(--gold);
+            font-size: clamp(1.3rem, 4.5vw, 2rem);
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        }
+
+        .ring-display { font-size: clamp(45px, 12vw, 70px); margin: 15px 0; }
+
+        .wedding-details h1 { font-size: clamp(1.2rem, 4vw, 1.7rem); margin: 5px 0; font-weight: 400; }
+        .date { color: var(--gold); font-size: clamp(1.1rem, 3.5vw, 1.3rem); font-weight: bold; margin-top: 5px; }
+
+        .timer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .unit {
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 15px;
+            padding: 20px 5px;
+            box-shadow: inset 0 0 15px rgba(212, 175, 55, 0.05);
+        }
+
+        .val { display: block; font-size: clamp(1.5rem, 6vw, 2.5rem); font-weight: bold; color: var(--white); text-shadow: 0 0 10px rgba(255,255,255,0.5); }
+        .lab { font-size: 0.9rem; color: var(--gold); font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* حاوية مؤثرات القلوب المتساقطة */
         #bg-particles {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -63,96 +148,71 @@
 
         .particle {
             position: absolute;
-            color: rgba(212, 175, 55, 0.7); /* لون ذهبي شفاف */
-            animation: fall 5s linear infinite;
+            color: rgba(212, 175, 55, 0.6); /* ذهبي شفاف */
+            animation: fall 6s linear infinite;
         }
 
-        /* أنيميشن التساقط */
         @keyframes fall {
             0% { transform: translateY(-100px) rotate(0deg); opacity: 0; }
             10% { opacity: 1; }
-            100% { transform: translateY(105vh) rotate(360deg); opacity: 0; }
+            90% { opacity: 1; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
         }
 
-        /* جزيئات البريق خلف الماوس */
-        .sparkle {
+        /* زر التحكم بالصوت (اختياري) */
+        #music-control {
             position: fixed;
-            width: 5px; height: 5px;
-            background-color: #d4af37;
+            bottom: 20px;
+            left: 20px;
+            z-index: 100;
+            background: rgba(212, 175, 55, 0.2);
+            border: 1px solid var(--gold);
+            color: var(--gold);
             border-radius: 50%;
-            pointer-events: none;
-            z-index: 9998;
-            opacity: 1;
-            animation: sparkle-fade 0.6s ease-out forwards;
+            width: 40px; height: 40px;
+            display: flex; justify-content: center; align-items: center;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
         }
 
-        @keyframes sparkle-fade {
-            0% { transform: scale(1); opacity: 1; }
-            100% { transform: scale(3); opacity: 0; }
+        /* لتوسيط المحتوى عمودياً */
+        .main-wrapper {
+            display: flex;
+            height: 100%;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* المحتوى الأساسي */
-        .content {
-            position: relative;
-            z-index: 10;
-            background: rgba(26, 26, 26, 0.85);
-            border: 2px solid #d4af37;
-            border-radius: 20px;
-            padding: clamp(20px, 5vw, 40px);
-            text-align: center;
-            width: 90%;
-            max-width: 500px;
-            color: white;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.7);
-            /* أنيميشن الدخول */
-            opacity: 0;
-            animation: fadeInContent 1.5s ease-out forwards;
+        @media (max-width: 480px) {
+            .timer-grid { gap: 8px; }
+            .content { padding: 30px 15px; }
+            .unit { padding: 15px 2px; }
         }
-
-        @keyframes fadeInContent {
-            0% { opacity: 0; transform: translateY(20px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-
-        .blessing {
-            color: #d4af37;
-            font-size: clamp(1.2rem, 4vw, 1.8rem);
-            font-weight: 700;
-            margin-bottom: 15px;
-        }
-
-        .timer-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .unit {
-            background: rgba(212, 175, 55, 0.15);
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            border-radius: 12px;
-            padding: 15px 5px;
-        }
-
-        .val { display: block; font-size: clamp(1.3rem, 5vw, 2.2rem); font-weight: bold; color: #fff; }
-        .lab { font-size: 0.8rem; color: #d4af37; font-weight: bold; }
     </style>
 </head>
 <body>
 
 <div id="custom-cursor">💍</div>
 
+<div class="video-bg-container">
+    <video autoplay loop muted playsinline class="video-bg">
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-grand-ballroom-with-golden-lights-and-chandeliers-42261-large.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="overlay"></div>
+</div>
+
 <div id="bg-particles"></div>
 
-<div class="bg-image">
-    <div class="overlay"></div>
+<div class="main-wrapper">
     <div class="content">
         <div class="blessing">بارك الله لهما وبارك عليهما وجمع بينهما في خير ❤️</div>
         
-        <div style="margin-bottom: 25px;">
-            <h1 style="font-size: clamp(1.1rem, 4vw, 1.5rem); margin: 5px 0;">زواج المهندس عبدالرحمن العتيبي</h1>
-            <div style="color: #d4af37; font-size: 1.2rem; font-weight: bold;">السبت: 6 يونيو 2026 م</div>
+        <div class="ring-display">💍</div>
+
+        <div class="wedding-details">
+            <h1>زواج المهندس عبدالرحمن العتيبي</h1>
+            <div class="date">السبت: 6 يونيو 2026 م</div>
         </div>
 
         <div class="timer-grid">
@@ -173,43 +233,47 @@
         cursor.style.left = e.clientX + 'px';
         cursor.style.top = e.clientY + 'px';
 
-        // توليد بريق خلف الخاتم
-        if (Math.random() > 0.8) { // عشان ما يكونش بريق كتير جداً
+        // توليد بريق فخم خلف الخاتم
+        if (Math.random() > 0.7) { // كثافة بريق متوسطة لفخامة أكثر
             const sparkle = document.createElement('div');
             sparkle.className = 'sparkle';
-            sparkle.style.left = (e.clientX + (Math.random() - 0.5) * 10) + 'px';
-            sparkle.style.top = (e.clientY + (Math.random() - 0.5) * 10) + 'px';
+            sparkle.style.left = (e.clientX + (Math.random() - 0.5) * 15) + 'px';
+            sparkle.style.top = (e.clientY + (Math.random() - 0.5) * 15) + 'px';
+            sparkle.style.background = Math.random() > 0.5 ? '#d4af37' : '#ffffff'; // مزيج ذهبي وأبيض
             document.body.appendChild(sparkle);
-            setTimeout(() => sparkle.remove(), 600); // حذف الجزيء بعد انتهاء الأنيميشن
+            setTimeout(() => sparkle.remove(), 700); 
         }
     });
 
-    // توليد مؤثرات الخلفية (القلوب والنجوم المتساقطة)
+    // توليد مؤثرات القلوب والنجوم المتساقطة
     const particleContainer = document.getElementById('bg-particles');
     const particleSymbols = ['❤️', '✨', '⭐'];
 
     function createParticle() {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        particle.innerHTML = particleSymbols[Math.floor(Math.random() * particleSymbols.length)];
-        particle.style.left = Math.random() * 100 + 'vw';
-        particle.style.fontSize = Math.random() * 20 + 10 + 'px';
-        particle.style.animationDuration = Math.random() * 3 + 3 + 's'; // مدة مختلفة لكل جزيء
-        particleContainer.appendChild(particle);
+        if (document.visibilityState === 'visible') { // توليد فقط إذا كانت الصفحة نشطة لتوفير الأداء
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.innerHTML = particleSymbols[Math.floor(Math.random() * particleSymbols.length)];
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.fontSize = Math.random() * 20 + 12 + 'px'; // أحجام مختلفة
+            particle.style.animationDuration = Math.random() * 4 + 4 + 's'; // سرعات مختلفة
+            particle.style.opacity = Math.random() * 0.5 + 0.5; // شفافية مختلفة
+            particleContainer.appendChild(particle);
 
-        setTimeout(() => particle.remove(), 5000);
+            setTimeout(() => particle.remove(), 6000);
+        }
     }
 
-    // توليد جزيء جديد كل 200 مللي ثانية
-    setInterval(createParticle, 200);
+    // توليد جزيء جديد كل 250 مللي ثانية
+    setInterval(createParticle, 250);
 
-    // كود عداد الوقت (لا يتغير)
+    // كود عداد الوقت المحدث (بأثر زجاجي عند الانتهاء)
     const targetDate = new Date("June 6, 2026 00:00:00").getTime();
     function update() {
         const now = new Date().getTime();
         const diff = targetDate - now;
         if (diff <= 0) {
-            document.querySelector(".content").innerHTML = "<div class='blessing'>ألف مبروك! تم الزواج بحمد الله ❤️</div>";
+            document.querySelector(".content").innerHTML = "<div class='blessing'>ألف مبروك! تم الزواج بحمد الله ❤️<br><span style='font-size:1.2rem; color:white;'>بارك الله لهما وبارك عليهما وجمع بينهما في خير</span></div>";
             return;
         }
         document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
@@ -219,6 +283,22 @@
     }
     setInterval(update, 1000);
     update();
+
+    // كود التحكم بالصوت (تعليقه مؤقتاً لحين وضع رابط)
+    /*
+    const audio = document.getElementById('wedding-audio');
+    const musicControl = document.getElementById('music-control');
+    
+    musicControl.addEventListener('click', () => {
+        if (audio.paused) {
+            audio.play();
+            musicControl.innerHTML = '🔊';
+        } else {
+            audio.pause();
+            musicControl.innerHTML = '🔇';
+        }
+    });
+    */
 </script>
 
 </body>
