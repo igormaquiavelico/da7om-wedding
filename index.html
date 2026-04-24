@@ -8,27 +8,22 @@
     <style>
         :root {
             --gold: #c5a059;
-            --light-gold: #e8d0a0;
             --white: #ffffff;
         }
 
-        * { 
-            box-sizing: border-box; 
-            cursor: none !important; /* إخفاء الماوس العادي */
-        }
+        * { box-sizing: border-box; cursor: none !important; }
 
         body, html {
-            height: 100%;
-            margin: 0;
+            height: 100%; margin: 0;
             font-family: 'Tajawal', sans-serif;
             overflow: hidden;
-            background-color: #0d0d0d;
+            background-color: #000;
         }
 
-        /* خلفية المجلس الملكي السعودي الفخم */
+        /* الخلفية البديلة الفخمة والمضمونة */
         .bg-image {
-            background-image: url('https://raw.githubusercontent.com/abu-hussam-dev/assets/main/royal-hall.jpg'); /* رابط افتراضي فخم */
-            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1519225423080-719306788a11?q=80&w=2070&auto=format&fit=crop'); 
+            background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), 
+            url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=2069&auto=format&fit=crop'); 
             height: 100%;
             background-position: center;
             background-repeat: no-repeat;
@@ -39,31 +34,19 @@
             position: relative;
         }
 
-        /* مؤشر الخاتم المذهب المخصص */
         #custom-cursor {
-            position: fixed;
-            top: 0; left: 0;
-            width: 45px; height: 45px;
-            font-size: 35px;
-            pointer-events: none; 
-            z-index: 9999;
+            position: fixed; top: 0; left: 0;
+            width: 45px; height: 45px; font-size: 35px;
+            pointer-events: none; z-index: 9999;
             transform: translate(-50%, -50%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            display: flex; justify-content: center; align-items: center;
             filter: drop-shadow(0 0 10px var(--gold));
-            transition: transform 0.02s linear;
         }
 
-        /* بريق خلف الماوس */
         .sparkle {
-            position: fixed;
-            width: 5px; height: 5px;
-            background-color: var(--light-gold);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9998;
-            opacity: 1;
+            position: fixed; width: 5px; height: 5px;
+            background-color: #fff; border-radius: 50%;
+            pointer-events: none; z-index: 9998;
             animation: sparkle-fade 0.8s ease-out forwards;
             box-shadow: 0 0 8px var(--gold);
         }
@@ -73,137 +56,72 @@
             100% { transform: scale(4); opacity: 0; }
         }
 
-        /* صندوق العداد الاحترافي (Glassmorphism Gold) */
         .content {
-            position: relative;
-            z-index: 10;
-            background: rgba(15, 15, 15, 0.75);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
+            position: relative; z-index: 10;
+            background: rgba(0, 0, 0, 0.65); /* زجاج أسود شفاف */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border: 2px solid var(--gold);
             border-radius: 30px;
             padding: clamp(30px, 8vw, 60px);
             text-align: center;
-            width: 92%;
-            max-width: 650px;
-            box-shadow: 0 0 40px rgba(197, 160, 89, 0.3), inset 0 0 20px rgba(197, 160, 89, 0.1);
+            width: 92%; max-width: 650px;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
             opacity: 0;
-            animation: fadeInPage 2s ease-out forwards;
+            animation: fadeIn 2s ease-out forwards;
         }
 
-        @keyframes fadeInPage {
-            0% { opacity: 0; transform: scale(0.95); }
-            100% { opacity: 1; transform: scale(1); }
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
         .blessing {
-            color: var(--light-gold);
-            font-size: clamp(1.4rem, 5vw, 2.4rem);
-            font-weight: 700;
-            margin-bottom: 20px;
-            text-shadow: 0 0 15px rgba(197, 160, 89, 0.5);
-            letter-spacing: 1px;
-        }
-
-        .divider {
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--gold), transparent);
-            margin: 20px auto;
-            width: 80%;
+            color: var(--gold);
+            font-size: clamp(1.4rem, 5vw, 2.2rem);
+            font-weight: 700; margin-bottom: 10px;
         }
 
         .wedding-info h1 {
             color: var(--white);
             font-size: clamp(1.2rem, 4.5vw, 1.8rem);
-            font-weight: 400;
-            margin: 10px 0;
+            margin: 10px 0; font-weight: 400;
         }
 
-        .date-display {
-            color: var(--gold);
-            font-size: clamp(1.1rem, 3.5vw, 1.3rem);
-            font-weight: bold;
-        }
-
-        /* شبكة الوقت الاحترافية */
         .timer-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: clamp(10px, 3vw, 25px);
-            margin-top: 40px;
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: clamp(10px, 3vw, 20px); margin-top: 30px;
         }
 
         .unit {
-            position: relative;
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(197, 160, 89, 0.3);
-            border-radius: 20px;
-            padding: clamp(20px, 5vw, 30px) 5px;
-            transition: all 0.4s ease;
+            border-radius: 15px; padding: 20px 5px;
         }
 
-        .unit:hover {
-            background: rgba(197, 160, 89, 0.1);
-            border-color: var(--gold);
-            transform: translateY(-5px);
-        }
+        .val { display: block; font-size: clamp(1.5rem, 7vw, 2.8rem); font-weight: bold; color: var(--white); }
+        .lab { font-size: 0.8rem; color: var(--gold); font-weight: bold; }
 
-        .val { 
-            display: block; 
-            font-size: clamp(1.8rem, 8vw, 3.2rem); 
-            font-weight: bold; 
-            color: var(--white);
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-        }
-
-        .lab { 
-            font-size: clamp(0.7rem, 3vw, 1rem); 
-            color: var(--gold); 
-            font-weight: bold; 
-            margin-top: 5px;
-            display: block;
-        }
-
-        /* جزيئات الخلفية المتساقطة */
-        #particles-container {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .fall-p {
-            position: absolute;
-            color: rgba(197, 160, 89, 0.6);
-            animation: fall-anim 8s linear infinite;
-        }
-
-        @keyframes fall-anim {
-            0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
-            20% { opacity: 1; }
-            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
-        }
-
-        @media (max-width: 480px) {
-            .content { padding: 40px 15px; }
-            .timer-grid { gap: 8px; }
+        #particles { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
+        .p { position: absolute; color: rgba(212, 175, 55, 0.5); animation: fall 7s linear infinite; }
+        @keyframes fall {
+            0% { transform: translateY(-10vh); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(110vh); opacity: 0; }
         }
     </style>
 </head>
 <body>
 
 <div id="custom-cursor">💍</div>
-<div id="particles-container"></div>
+<div id="particles"></div>
 
 <div class="bg-image">
     <div class="content">
         <div class="blessing">بارك الله لهما وبارك عليهما وجمع بينهما في خير ❤️</div>
-        
-        <div class="divider"></div>
-
         <div class="wedding-info">
             <h1>زواج المهندس عبدالرحمن العتيبي</h1>
-            <div class="date-display">6 يونيو 2026 م</div>
+            <div style="color: var(--gold); font-weight: bold;">6 يونيو 2026 م</div>
         </div>
 
         <div class="timer-grid">
@@ -216,53 +134,31 @@
 </div>
 
 <script>
-    // حركة الماوس والبريق
     const cursor = document.getElementById('custom-cursor');
     document.addEventListener('mousemove', (e) => {
         cursor.style.left = e.clientX + 'px';
         cursor.style.top = e.clientY + 'px';
-
         if (Math.random() > 0.7) {
-            const sp = document.createElement('div');
-            sp.className = 'sparkle';
-            sp.style.left = (e.clientX + (Math.random() - 0.5) * 15) + 'px';
-            sp.style.top = (e.clientY + (Math.random() - 0.5) * 15) + 'px';
-            document.body.appendChild(sp);
-            setTimeout(() => sp.remove(), 800);
+            const s = document.createElement('div');
+            s.className = 'sparkle';
+            s.style.left = e.clientX + 'px'; s.style.top = e.clientY + 'px';
+            document.body.appendChild(s);
+            setTimeout(() => s.remove(), 800);
         }
     });
 
-    // القلوب والنجوم المتساقطة
-    const partContainer = document.getElementById('particles-container');
-    const symbols = ['✨', '⭐', '❤️'];
-    function createP() {
+    const parts = document.getElementById('particles');
+    setInterval(() => {
         const p = document.createElement('div');
-        p.className = 'fall-p';
-        p.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+        p.className = 'p'; p.innerHTML = '✨';
         p.style.left = Math.random() * 100 + 'vw';
-        p.style.fontSize = Math.random() * 20 + 10 + 'px';
-        p.style.animationDuration = Math.random() * 5 + 5 + 's';
-        partContainer.appendChild(p);
-        setTimeout(() => p.remove(), 8000);
-    }
-    setInterval(createP, 300);
+        p.style.animationDuration = (Math.random() * 3 + 4) + 's';
+        parts.appendChild(p);
+        setTimeout(() => p.remove(), 7000);
+    }, 300);
 
-    // عداد الوقت
     const target = new Date("June 6, 2026 00:00:00").getTime();
     function update() {
         const diff = target - new Date().getTime();
-        if (diff <= 0) {
-            document.querySelector(".content").innerHTML = "<div class='blessing'>ألف مبروك الزواج! ❤️</div>";
-            return;
-        }
-        document.getElementById("d").innerText = Math.floor(diff / 86400000);
-        document.getElementById("h").innerText = Math.floor((diff % 86400000) / 3600000);
-        document.getElementById("m").innerText = Math.floor((diff % 3600000) / 60000);
-        document.getElementById("s").innerText = Math.floor((diff % 60000) / 1000);
-    }
-    setInterval(update, 1000);
-    update();
-</script>
-
-</body>
-</html>
+        if (diff <= 0) return;
+        document.getElementById
