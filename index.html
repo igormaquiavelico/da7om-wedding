@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فرح العتيبي | Al-Otaibi Wedding</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; }
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Tajawal', sans-serif;
+            overflow: hidden; /* لمنع التمرير */
+        }
+
+        /* خلفية الصفحة - يمكنك تغيير الرابط برابط صورة قاعة فرح أخرى */
+        .bg-image {
+            background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop'); 
+            height: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* طبقة تغبيش سوداء خفيفة لتوضيح النص */
+        .overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .content {
+            position: relative;
+            z-index: 10;
+            background: rgba(26, 26, 26, 0.85); /* خلفية الصندوق شفافة قليلاً */
+            border: 2px solid #d4af37;
+            border-radius: 20px;
+            padding: clamp(20px, 5vw, 40px);
+            text-align: center;
+            width: 90%;
+            max-width: 500px;
+            color: white;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.7);
+        }
+
+        .blessing {
+            color: #d4af37;
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .ring { font-size: clamp(40px, 10vw, 60px); margin: 10px 0; }
+
+        .wedding-info { margin-bottom: 25px; }
+        .wedding-info h1 { font-size: clamp(1.1rem, 4vw, 1.5rem); margin: 5px 0; }
+        .date { color: #d4af37; font-size: 1.2rem; font-weight: bold; }
+
+        .timer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .unit {
+            background: rgba(212, 175, 55, 0.15);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            border-radius: 12px;
+            padding: 15px 5px;
+        }
+
+        .val { display: block; font-size: clamp(1.3rem, 5vw, 2.2rem); font-weight: bold; color: #fff; }
+        .lab { font-size: 0.8rem; color: #d4af37; font-weight: bold; }
+
+        @media (max-width: 480px) {
+            .timer-grid { gap: 5px; }
+            .content { padding: 20px 10px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="bg-image">
+    <div class="overlay"></div>
+    <div class="content">
+        <div class="blessing">بارك الله لهما وبارك عليهما وجمع بينهما في خير ❤️</div>
+        <div class="ring">💍</div>
+        
+        <div class="wedding-info">
+            <h1>زواج المهندس عبدالرحمن العتيبي</h1>
+            <div class="date">السبت: 6 يونيو 2026 م</div>
+        </div>
+
+        <div class="timer-grid">
+            <div class="unit"><span class="val" id="days">00</span><span class="lab">يوم</span></div>
+            <div class="unit"><span class="val" id="hours">00</span><span class="lab">ساعة</span></div>
+            <div class="unit"><span class="val" id="minutes">00</span><span class="lab">دقيقة</span></div>
+            <div class="unit"><span class="val" id="seconds">00</span><span class="lab">ثانية</span></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const targetDate = new Date("June 6, 2026 00:00:00").getTime();
+    function update() {
+        const now = new Date().getTime();
+        const diff = targetDate - now;
+        if (diff <= 0) {
+            document.querySelector(".content").innerHTML = "<div class='blessing'>ألف مبروك! تم الزواج بحمد الله ❤️</div>";
+            return;
+        }
+        document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+        document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        document.getElementById("minutes").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        document.getElementById("seconds").innerText = Math.floor((diff % (1000 * 60)) / 1000);
+    }
+    setInterval(update, 1000);
+    update();
+</script>
+
+</body>
+</html>
