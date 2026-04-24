@@ -6,15 +6,21 @@
     <title>فرح العتيبي | Al-Otaibi Wedding</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        * { box-sizing: border-box; }
+        * { 
+            box-sizing: border-box; 
+            /* إخفاء مؤشر الماوس العادي في كل الصفحة */
+            cursor: none !important; 
+        }
+
         body, html {
             height: 100%;
             margin: 0;
             font-family: 'Tajawal', sans-serif;
-            overflow: hidden; /* لمنع التمرير */
+            overflow: hidden;
+            background-color: #1a1a1a;
         }
 
-        /* خلفية الصفحة - يمكنك تغيير الرابط برابط صورة قاعة فرح أخرى */
+        /* حاوية الخلفية */
         .bg-image {
             background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop'); 
             height: 100%;
@@ -27,17 +33,33 @@
             position: relative;
         }
 
-        /* طبقة تغبيش سوداء خفيفة لتوضيح النص */
         .overlay {
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(0, 0, 0, 0.5);
         }
 
+        /* مؤشر الخاتم المخصص */
+        #custom-cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 40px;
+            height: 40px;
+            font-size: 30px;
+            pointer-events: none; /* عشان ما يضغطش على الأزرار بالخطأ */
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.05s ease-out;
+        }
+
         .content {
             position: relative;
             z-index: 10;
-            background: rgba(26, 26, 26, 0.85); /* خلفية الصندوق شفافة قليلاً */
+            background: rgba(26, 26, 26, 0.85);
             border: 2px solid #d4af37;
             border-radius: 20px;
             padding: clamp(20px, 5vw, 40px);
@@ -55,16 +77,11 @@
             margin-bottom: 15px;
         }
 
-        .ring { font-size: clamp(40px, 10vw, 60px); margin: 10px 0; }
-
-        .wedding-info { margin-bottom: 25px; }
-        .wedding-info h1 { font-size: clamp(1.1rem, 4vw, 1.5rem); margin: 5px 0; }
-        .date { color: #d4af37; font-size: 1.2rem; font-weight: bold; }
-
         .timer-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 10px;
+            margin-top: 20px;
         }
 
         .unit {
@@ -76,24 +93,20 @@
 
         .val { display: block; font-size: clamp(1.3rem, 5vw, 2.2rem); font-weight: bold; color: #fff; }
         .lab { font-size: 0.8rem; color: #d4af37; font-weight: bold; }
-
-        @media (max-width: 480px) {
-            .timer-grid { gap: 5px; }
-            .content { padding: 20px 10px; }
-        }
     </style>
 </head>
 <body>
+
+<div id="custom-cursor">💍</div>
 
 <div class="bg-image">
     <div class="overlay"></div>
     <div class="content">
         <div class="blessing">بارك الله لهما وبارك عليهما وجمع بينهما في خير ❤️</div>
-        <div class="ring">💍</div>
         
-        <div class="wedding-info">
-            <h1>زواج المهندس عبدالرحمن العتيبي</h1>
-            <div class="date">السبت: 6 يونيو 2026 م</div>
+        <div style="margin-bottom: 25px;">
+            <h1 style="font-size: clamp(1.1rem, 4vw, 1.5rem); margin: 5px 0;">زواج المهندس عبدالرحمن العتيبي</h1>
+            <div style="color: #d4af37; font-size: 1.2rem; font-weight: bold;">السبت: 6 يونيو 2026 م</div>
         </div>
 
         <div class="timer-grid">
@@ -106,6 +119,14 @@
 </div>
 
 <script>
+    // تحريك الخاتم مع الماوس
+    const cursor = document.getElementById('custom-cursor');
+    document.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+    });
+
+    // كود عداد الوقت
     const targetDate = new Date("June 6, 2026 00:00:00").getTime();
     function update() {
         const now = new Date().getTime();
